@@ -192,7 +192,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 };
 
 // Check if account is locked
-userSchema.methods.isAccountLocked = function() { ... }
+userSchema.methods.isAccountLocked = function(){
   return this.isLocked || (this.lockUntil && this.lockUntil > Date.now());
 };
 
