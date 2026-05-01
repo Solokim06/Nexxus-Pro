@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+coverage/
+client/build/
+server/dist/
+*.min.js
+*.bundle.js
+**/__tests__/fixtures/
+**/tests/fixtures/
+**/migrations/
+**/seeders/
+**/scripts/
+logs/
+storage/
+uploads/

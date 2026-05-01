@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # PostgreSQL for development
+  postgres:
+    image: postgres:15-alpine
+    container_name: nexxus-postgres-dev
+    environment:
+      POSTGRES_DB: nexxus_pro_dev
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    networks:
+      - nexxus-dev-network
+
+  # Redis for development
+  redis:
+    image: redis:7-alpine
+    container_name: nexxus-redis-dev
+    ports:
+      - "6379:6379"
+    networks:
+      - nexxus-dev-network
+
+  # Backend with hot reload
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: nexxus-backend-dev
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      DB_HOST: postgres
+      REDIS_HOST: redis
+      DATABASE_URL: postgresql://devuser:devpass@postgres:5432/nexxus_pro_dev
+    volumes:
+      - ../server:/app
+      - ../storage:/app/storage
+      - /app/node_modules
+    ports:
+      - "5000:5000"
+      - "9229:9229"  # Debug port
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - nexxus-dev-network
+    command: npm run dev
+
+  # Frontend with hot reload
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend.dev
+    container_name: nexxus-frontend-dev
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+      REACT_APP_WS_URL: ws://localhost:5000
+    volumes:
+      - ../client:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - nexxus-dev-network
+
+networks:
+  nexxus-dev-network:
+    driver: bridge
+
+volumes:
+  postgres_dev_data:

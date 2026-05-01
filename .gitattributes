@@ -1,0 +1,39 @@
+# Auto detect text files
+* text=auto
+
+# Source code
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+
+# Database
+*.sql text eol=lf
+
+# Config files
+*.conf text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.gz binary
+
+# Lock files
+package-lock.json binary
+yarn.lock binary

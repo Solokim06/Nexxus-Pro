@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+coverage/
+client/build/
+server/dist/
+*.min.js
+*.bundle.js
+package-lock.json
+yarn.lock
+*.log
+*.md
+CHANGELOG.md
+logs/
+storage/
+uploads/

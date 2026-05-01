@@ -1,0 +1,17 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nexxus-pro.com/sitemap.xml
+
+# Disallow admin paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/private/
+
+# Crawl delay for heavy bots
+Crawl-delay: 5
+
+# Host directive
+Host: https://nexxus-pro.com
